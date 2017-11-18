@@ -6,7 +6,7 @@
 /*   By: evanheum <evanheum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/16 16:10:56 by evanheum          #+#    #+#             */
-/*   Updated: 2017/11/17 14:43:14 by evanheum         ###   ########.fr       */
+/*   Updated: 2017/11/17 15:58:17 by evanheum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 typedef struct		s_room
 {
+	struct s_room	*next;
+	struct s_room	*prev;
 
 }					t_room;
 
@@ -29,12 +31,13 @@ typedef struct		s_link
 typedef struct		s_lem
 {
 	int				ants;
+	int				flag;
 }					t_lem;
 /*
 ** -------------------------------- read.c ----------------------------------
 */
-int		start_command(t_lem *lem);
 int		ant_count(t_lem *lem);
+void	check_format(t_lem *lem);
 /*
 ** -------------------------------- lemin.c ---------------------------------
 */
