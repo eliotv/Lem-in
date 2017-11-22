@@ -6,7 +6,7 @@
 /*   By: evanheum <evanheum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/16 16:10:56 by evanheum          #+#    #+#             */
-/*   Updated: 2017/11/17 15:58:17 by evanheum         ###   ########.fr       */
+/*   Updated: 2017/11/17 17:03:03 by evanheum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,12 @@
 
 typedef struct		s_room
 {
+	char			name;
+	int				x;
+	int				y;
+	t_link			*link;
+
 	struct s_room	*next;
-	struct s_room	*prev;
 
 }					t_room;
 
@@ -33,6 +37,12 @@ typedef struct		s_lem
 	int				ants;
 	int				flag;
 }					t_lem;
+
+/*
+** -------------------------------- store.c ---------------------------------
+*/
+void		room_store(t_lem *lem, char *line);
+void		link_store(t_lem *lem, char *line);
 /*
 ** -------------------------------- read.c ----------------------------------
 */

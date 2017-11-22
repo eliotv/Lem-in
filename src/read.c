@@ -6,7 +6,7 @@
 /*   By: evanheum <evanheum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/16 19:16:44 by evanheum          #+#    #+#             */
-/*   Updated: 2017/11/17 16:12:51 by evanheum         ###   ########.fr       */
+/*   Updated: 2017/11/17 16:16:37 by evanheum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,13 @@ void	check_format(t_lem *lem)
 			while (ft_isdigit(line[i]))
 				i++;
 			if (line[i] == '-')
-				link_store();
+				link_store(lem , line);
 			else if (line[i] == ' ')
-				room_store();
+				room_store(lem, line);
 			else
 				error_handling();
 		}
-
 		ft_strdel(&line);
-		
 	}
 	ft_printf("%d\n", lem->flag);
 	if (lem->flag != 2)
