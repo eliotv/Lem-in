@@ -18,7 +18,7 @@ int ant_count(t_lem *lem)
 
 	if (get_next_line(0, &line) < 0)
 		return (-1);
-	ft_printf("%s\n", line);
+	// ft_printf("%s\n", line);
 	lem->ants = ft_atoi(line);
 	if(lem->ants < 1)
 		error_handling();
@@ -30,6 +30,7 @@ void	check_format(t_lem *lem)
 {
 	char *line;
 	int i;
+	
 	while(get_next_line(0, &line) > 0)
 	{
 		i = 0;
@@ -42,17 +43,16 @@ void	check_format(t_lem *lem)
 			while (ft_isdigit(line[i]))
 				i++;
 			if (line[i] == '-')
-				link_store();
+				link_store(lem, line);
 			else if (line[i] == ' ')
-				room_store();
+				room_store(lem, line);
 			else
 				error_handling();
 		}
-
 		ft_strdel(&line);
 		
 	}
-	ft_printf("%d\n", lem->flag);
+	// ft_printf("%d\n", lem->flag);
 	if (lem->flag != 2)
 		error_handling();
 }

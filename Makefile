@@ -22,6 +22,7 @@ LEMINDR = \
 	lemin.c \
 	read.c \
 	init.c \
+	store.c \
 
 SRC = $(addprefix src/, $(LEMINDR))
 OBJ = $(SRC:.c=.o)

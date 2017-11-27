@@ -33,8 +33,8 @@ int error_handling(void)
 int		main(void)
 {
 	t_lem	*lem;
-
 	lem = init_struct();
 	ant_count(lem);
 	check_format(lem);
+	// ft_printf("1\n");
 }

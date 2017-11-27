@@ -12,3 +12,27 @@
 
 #include "../lemin.h"
 
+void    link_store(t_lem *lem, char *line)
+{
+
+}
+
+void    room_store(t_lem *lem, char *line)
+{
+    char **str;
+    t_room *new;
+
+    while (lem->room)
+        lem->room = lem->room->next;
+    str = ft_strsplit(line, ' ');
+    lem->room->name = str[0];
+    lem->room->x = ft_atoi(str[1]);
+    lem->room->y = ft_atoi(str[2]);
+    new = (t_room*)malloc(sizeof(t_link));
+    new = lem->room->next;
+    lem->room = lem->room->next;
+
+    // lem->room = lem->room->next;
+    ft_printf("%s\n%d\t%d\n", lem->room->name, lem->room->x, lem->room->y);
+
+}

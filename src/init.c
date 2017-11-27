@@ -31,5 +31,7 @@ void		init_link(t_lem *lem)
 
 void		init_room(t_lem *lem)
 {
-
+	lem->room->name = NULL;
+	lem->room->x = 0;
+	lem->room->y = 0;
 }

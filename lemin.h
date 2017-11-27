@@ -17,14 +17,15 @@
 
 typedef struct		s_room
 {
+	char			*name;
+	int				x;
+	int				y;
 	struct s_room	*next;
-	struct s_room	*prev;
-
 }					t_room;
 
 typedef struct		s_link
 {
-
+	char 			**links;
 }					t_link;
 
 
@@ -32,7 +33,14 @@ typedef struct		s_lem
 {
 	int				ants;
 	int				flag;
+	t_link			link;
+	t_room			*room;
 }					t_lem;
+/*
+** -------------------------------- read.c ----------------------------------
+*/
+void    link_store(t_lem *lem, char *line);
+void    room_store(t_lem *lem, char *line);
 /*
 ** -------------------------------- read.c ----------------------------------
 */
