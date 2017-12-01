@@ -6,7 +6,7 @@
 #    By: evanheum <evanheum@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/16 15:11:12 by evanheum          #+#    #+#              #
-#    Updated: 2017/11/17 16:20:16 by evanheum         ###   ########.fr        #
+#    Updated: 2017/11/30 08:20:32 by evanheum         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,8 @@ LEMINDR = \
 	read.c \
 	init.c \
 	store.c \
+	validation.c \
+	pathing.c \
 
 SRC = $(addprefix src/, $(LEMINDR))
 OBJ = $(SRC:.c=.o)

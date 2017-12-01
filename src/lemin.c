@@ -12,6 +12,25 @@
 
 #include "../lemin.h"
 
+void print_struct(t_lem *lem)
+{
+	t_room	*room;
+	t_link	*link;
+
+	room = lem->room;
+	// ft_printf("start: %s\nend: %s\n", lem->start, lem->end);
+	while (room)
+	{
+		link = room->link;
+		while (link)
+		{
+			ft_printf("room: %s\t linked: %s\n", room->name, link->room->name);
+			link = link->next;
+		}
+		room = room->next;
+	}
+}
+
 int error_handling(void)
 {
 	int i;
@@ -32,9 +51,20 @@ int error_handling(void)
 
 int		main(void)
 {
+	int i;
+
+	i = 0;
 	t_lem	*lem;
 	lem = init_struct();
 	ant_count(lem);
-	check_format(lem);
-	// ft_printf("1\n");
+	read_input(lem);
+	// ft_printf("%d\n", lem->room_size);
+	start_path(lem);
+	// print_struct(lem);
+	// while (i < lem->room_size)
+	// {
+	// 	// ft_printf("%d\n",/ lem->aryid);
+	// 	ft_printf("%s\n", lem->pathz[lem->aryid][i]);
+	// 	i++;
+	// }
 }

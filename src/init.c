@@ -6,7 +6,7 @@
 /*   By: evanheum <evanheum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/16 19:59:14 by evanheum          #+#    #+#             */
-/*   Updated: 2017/11/27 14:45:33 by evanheum         ###   ########.fr       */
+/*   Updated: 2017/11/30 10:42:56 by evanheum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,17 @@ t_lem		*init_struct(void)
 	t_lem	*lem;
 
 	lem = (t_lem*)malloc(sizeof(t_lem));
-	// init_link(lem);
-	// ft_printf("1\n");
-	// init_room(lem);
 	lem->ants = 0;
-	lem->flag = 0;
+	lem->sflag = 0;
+	lem->eflag = 0;
+	lem->start = "\0";
+	lem->end = "\0";
 	lem->room = NULL;
-	lem->link = NULL;
+	lem->room_size = 0;
+	lem->pathz = NULL;
+	lem->namelen = 0;
+	lem->pathid = 0;
+	lem->aryid = 0;
 	return (lem);
 }
 
