@@ -6,11 +6,40 @@
 /*   By: evanheum <evanheum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 16:13:23 by evanheum          #+#    #+#             */
-/*   Updated: 2017/11/30 11:19:57 by evanheum         ###   ########.fr       */
+/*   Updated: 2017/12/06 18:57:23 by evanheum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lemin.h"
+
+t_path	*store_path(t_lem *lem, int len, char **rlist)
+{
+    t_path *new;
+    t_path *tmp;
+    int i;
+
+    i = 0;
+    tmp = lem->path;
+    if (!(new = malloc(sizeof(t_path))))
+        return NULL;
+    new->valid = (char**)malloc(sizeof(char*) * lem->room_size + 1);
+    new->len = len;
+    new->weight = 0;
+    new->flag = 0;
+    while (i <= len)
+    {
+        new->valid[i] = ft_strdup(rlist[i]);
+        i++;
+    }
+    new->valid[i] = NULL;
+    new->next = NULL;
+    if (!tmp)
+        return (new);
+    while (tmp->next)
+        tmp = tmp->next;
+    tmp->next = new;
+    return (lem->path);
+}
 
 t_link       *append_link(t_room *r1, t_room *r2, char *name)
 {
@@ -71,17 +100,18 @@ t_room    *room_store(t_lem *lem, char *line)
 {
     char **str;
     t_room *tmp;
+    t_room *new;
     
+    new = NULL;
     tmp = lem->room;
     if(line[0] == 'L')
         error_handling();
-    t_room *new = NULL;
     if (!(new = (t_room*)malloc(sizeof(t_room))))
         return NULL;
     str = ft_strsplit(line, ' ');
     if (lem->sflag == 1 || lem->eflag == 1)
         check_startend(lem,str[0]);
-    lem->namelen = (ft_strlen(str[0]) > lem->namelen) ? ft_strlen(str[0]) : lem->namelen;
+    // lem->namelen = (ft_strlen(str[0]) > lem->namelen) ? ft_strlen(str[0]) : lem->namelen;
     new->name = str[0];
     if (!check_xy_format(str[1]) && !check_xy_format(str[2]))
     {

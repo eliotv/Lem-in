@@ -6,7 +6,7 @@
 /*   By: evanheum <evanheum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/16 19:16:44 by evanheum          #+#    #+#             */
-/*   Updated: 2017/11/30 08:39:15 by evanheum         ###   ########.fr       */
+/*   Updated: 2017/12/01 13:44:26 by evanheum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,14 @@ int ant_count(t_lem *lem)
 {
 	char *line;
 
+	line = NULL;
 	if (get_next_line(0, &line) < 0)
 		return (-1);
 	if (check_xy_format(line))
 		error_handling();
 	lem->ants = ft_atoi(line);
 	if(lem->ants < 1)
-		error_handling();
+	error_handling();	
 	ft_strdel(&line);
 	return (0);
 }
