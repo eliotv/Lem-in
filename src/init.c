@@ -6,7 +6,7 @@
 /*   By: evanheum <evanheum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/16 19:59:14 by evanheum          #+#    #+#             */
-/*   Updated: 2017/12/06 17:21:57 by evanheum         ###   ########.fr       */
+/*   Updated: 2017/12/08 10:45:11 by evanheum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,28 +31,28 @@ t_lem		*init_struct(void)
 	return (lem);
 }
 
-int compare_path(t_path *path, t_path *p_next)
-{
-	int i;
-	int j;
+// int compare_path(t_path *path, t_path *p_next)
+// {
+// 	int i;
+// 	int j;
 
-	i = 1;
-	while (i < path->len)
-	{
-		j = 1;
-		while (j < p_next->len)
-		{
-			if (!ft_strcmp(path->valid[i], p_next->valid[j]))
-			{
-				return (-1);
-			}
+// 	i = 1;
+// 	while (i < path->len)
+// 	{
+// 		j = 1;
+// 		while (j < p_next->len)
+// 		{
+// 			if (!ft_strcmp(path->valid[i], p_next->valid[j]))
+// 			{
+// 				return (-1);
+// 			}
 			
-			j++;
-		}
-		i++;
-	}
-	return (0);
-}
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	return (0);
+// }
 
 void ft_print2d(char **ary, int len)
 {
@@ -65,3 +65,4 @@ void ft_print2d(char **ary, int len)
 		i++;
 	}
 }
+
