@@ -6,7 +6,7 @@
 /*   By: evanheum <evanheum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/16 16:09:55 by evanheum          #+#    #+#             */
-/*   Updated: 2017/12/09 14:17:09 by evanheum         ###   ########.fr       */
+/*   Updated: 2017/12/11 13:41:45 by evanheum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,16 @@ void print_struct(t_lem *lem)
 	// ft_printf("start: %s\nend: %s\n", lem->start, lem->end);
 	while (room)
 	{
-		link = room->link;
-		while (link)
-		{
-			ft_printf("room: %s\t linked: %s\n", room->name, link->room->name);
-			link = link->next;
-		}
+		// link = room->link;
+		// while (link)
+		// {
+		if (room->ant > 0)
+			ft_printf("L%s-%d ", room->name, room->ant);
+			// link = link->next;
+		// }
 		room = room->next;
 	}
+	ft_printf("\n");
 }
 
 int error_handling(void)
@@ -83,24 +85,28 @@ int error_handling(void)
 
 int		main(void)
 {
-	t_path *path;
+	// t_path *path;
 	t_lem	*lem;
+
 	lem = init_struct();
 	ant_count(lem);
 	read_input(lem);
 	start_path(lem);
-	// print_struct(lem);
 	// print_path(lem);
 	shortest_paths(lem);
 	find_optimal_path(lem);
 	add_optimal_path(lem);
 	remove_paths(lem);
-	path = lem->path;
-	while (path)
-	{
-		ft_print2d(path->valid, path->len);
-		ft_printf(RED"%d\t"END BLUE"%d\n"END, path->weight, path->flag);
-		path = path->next;
-	}
+	shortest_opt_path(lem);
+	// move_ants(lem);
+	// print_struct(lem);
+	// path = lem->path;
+	// while (path)
+	// {
+	// 	ft_print2d(path->valid, path->len);
+	// 	ft_printf(RED"%d\t"END BLUE"%d\n"END, path->weight, path->flag);
+	// 	path = path->next;
+	// }
+	// ft_printf("%d\n", lem->len);
 	return (0);
 }

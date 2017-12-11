@@ -6,7 +6,7 @@
 /*   By: evanheum <evanheum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/16 16:10:56 by evanheum          #+#    #+#             */
-/*   Updated: 2017/12/09 14:17:46 by evanheum         ###   ########.fr       */
+/*   Updated: 2017/12/11 10:41:41 by evanheum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct		s_lem
 	int				namelen;
 	int				pathid;
 	int				aryid;
+	int 			len;
 }					t_lem;
 /*
 ** -------------------------------- validation.c ----------------------------
@@ -101,7 +102,9 @@ void	find_optimal_path(t_lem *lem);
 /*
 ** -------------------------------- opt_pathing.c ----------------------------
 */
-
+void shortest_opt_path(t_lem *lem);
+int place_ant(t_lem *lem, char *name, int ant);
+int add_ant(t_lem *lem, int ant);
 /*
 ** -------------------------------- free.c -----------------------------------
 */

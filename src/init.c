@@ -6,7 +6,7 @@
 /*   By: evanheum <evanheum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/16 19:59:14 by evanheum          #+#    #+#             */
-/*   Updated: 2017/12/08 10:45:11 by evanheum         ###   ########.fr       */
+/*   Updated: 2017/12/09 16:37:00 by evanheum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_lem		*init_struct(void)
 	lem->namelen = 0;
 	lem->pathid = 1;
 	lem->aryid = 0;
+	lem->len = 0;
 	return (lem);
 }
 

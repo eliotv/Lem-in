@@ -6,7 +6,7 @@
 /*   By: evanheum <evanheum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 16:13:23 by evanheum          #+#    #+#             */
-/*   Updated: 2017/12/06 18:57:23 by evanheum         ###   ########.fr       */
+/*   Updated: 2017/12/11 10:30:30 by evanheum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ t_room    *room_store(t_lem *lem, char *line)
         check_startend(lem,str[0]);
     // lem->namelen = (ft_strlen(str[0]) > lem->namelen) ? ft_strlen(str[0]) : lem->namelen;
     new->name = str[0];
+    new->ant = 0;
     if (!check_xy_format(str[1]) && !check_xy_format(str[2]))
     {
         new->x = ft_atoi(str[1]);
