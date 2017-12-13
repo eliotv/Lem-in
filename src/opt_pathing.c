@@ -6,89 +6,19 @@
 /*   By: evanheum <evanheum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 10:42:19 by evanheum          #+#    #+#             */
-/*   Updated: 2017/12/11 13:42:51 by evanheum         ###   ########.fr       */
+/*   Updated: 2017/12/12 14:14:33 by evanheum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lemin.h"
 
-int add_ant (t_lem *lem, int ant)
-{
-	t_path *path;
-	int		i;
-	i = 1;
-	path = lem->path;
-	while (path)
-	{
-		if (path->len <= lem->len && ant < lem->ants)
-		{
-			// place_ant(lem, path->valid[1], ant);
-			if (place_ant(lem, path->valid[i], ant) == 0)
-				ant++;
-			
-		}
-		path = path->next;
-	}
-	i++;
-	return (ant);
-}
-
-
-int place_ant(t_lem *lem, char *name, int ant)
-{
-	t_room *room;
-
-	room = lem->room;
-	while (ft_strcmp(room->name, name) && room)
-		room = room->next;
-	if (room->ant == 0)
-	{
-		room->ant = ant;
-		return 0;
-	}
-	return -1;
-}
-
-void push_ants(t_lem *lem)
-{
-	t_link *link;
-	t_room *room;
-	
-	room = lem->room;
-	while (room)
-	{
-		if (room->ant != 0)
-		{
-			find_next_room(lem->path, room);
-			//compare rooms find next room
-		}
-	}
-}
-
-void move_ants(t_lem *lem)
-{
-	int end;
-	int	i;
-	i = 0;
-	// while (end < lem->ants)
-	// {
-		if (i < lem->ants)
-		{
-			i++;
-			i = add_ant(lem, i);
-			// lem->len++;
-		}
-		print_struct(lem);
-		push_ants(lem);
-		
-	// }
-}
 
 void shortest_opt_path(t_lem *lem)
 {
 	t_path *path;
 
 	path = lem->path;
+	
 	if (path->next == NULL)
 		lem->len = path->len;
 	while (path->next)
@@ -99,28 +29,59 @@ void shortest_opt_path(t_lem *lem)
 			lem->len = path->next->len;
 		path = path->next;
 	}
+	set_ant_paths(lem);
 }
 
-void find_next_room(t_path *path, t_room *room)
+void set_ant_paths(t_lem *lem)
 {
-	t_path *p;
-	t_room *r;
-	int i;
-
-	r = room;
-	p = path;
-	while (p)
+	t_path	*path;
+	t_ant	*ant;
+	int		len;
+	
+	ant = lem->ant;
+	len = lem->len;
+	while (ant)
 	{
-		i = 1;
-		while (p->valid[i])
+		path = lem->path;
+		while (path)
 		{
-			if (ft_strcmp(p->valid[i], r->name))
+			if (ant && path->len <= len)
 			{
-				
+				ant->path = path;
+				ant->len = len;
+				ant = ant->next;
 			}
-			i++;
-
+			path = path->next;
 		}
-		
+		len++;
+	}
+	move_ants(lem);
+}
+
+void move_ants(t_lem *lem)
+{
+	int end;
+	t_ant *ant;
+
+	end = 0;
+	while (end < lem->antcount)
+	{
+		ant = lem->ant;
+		while (ant)
+		{
+			if (ant->len <= lem->len)
+			{
+				if (ant->path->valid[ant->i])
+				{
+					if (!ft_strcmp(ant->path->valid[ant->i], lem->end))
+						end++;
+					ft_printf("L%d-%s ",ant->ant, ant->path->valid[ant->i]);
+					ant->i++;
+				}
+			}
+			ant = ant->next;
+		}
+		ft_printf("\n");
+		lem->len++;
 	}
 }

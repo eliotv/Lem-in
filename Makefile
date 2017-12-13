@@ -6,7 +6,7 @@
 #    By: evanheum <evanheum@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/16 15:11:12 by evanheum          #+#    #+#              #
-#    Updated: 2017/12/09 16:13:58 by evanheum         ###   ########.fr        #
+#    Updated: 2017/12/13 09:08:25 by evanheum         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ $(OBJ): %.o: %.c
 	@$(CC) -c $(LDFALGS) $< -o $@
 
 $(NAME): $(LIBFT) $(OBJ)
-	@$(CC) $(LDFLAGS) -o  $@ $^
+	@$(CC) src/alloc_wrap.c $(LDFLAGS) -o  $@ $^
 	@echo "\033[32m    ~*COMPILED LEM-IN*~\033[0m"
 
 clean:

@@ -6,7 +6,7 @@
 /*   By: evanheum <evanheum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 09:28:22 by evanheum          #+#    #+#             */
-/*   Updated: 2017/11/29 12:18:28 by evanheum         ###   ########.fr       */
+/*   Updated: 2017/12/12 16:09:57 by evanheum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	check_startend(t_lem *lem, char *str)
 		lem->eflag++;
 	}
 	else
-		error_handling();
+		error_handling("Invalid number or starts or endings");
 }
 
 void check_format(t_lem *lem, char *str)

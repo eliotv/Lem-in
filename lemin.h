@@ -6,7 +6,7 @@
 /*   By: evanheum <evanheum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/16 16:10:56 by evanheum          #+#    #+#             */
-/*   Updated: 2017/12/11 10:41:41 by evanheum         ###   ########.fr       */
+/*   Updated: 2017/12/13 08:32:55 by evanheum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 # include <stdio.h>
 # include <math.h>
 
+typedef struct		s_read
+{
+	char			*str;
+	struct s_read	*next;
+}					t_read;
+
 typedef struct		s_path
 {
 	char			**valid;
@@ -24,6 +30,15 @@ typedef struct		s_path
 	int				len;
 	struct s_path	*next;
 }					t_path;
+
+typedef struct 		s_ant
+{
+	int				len;
+	int				ant;
+	int				i;
+	struct s_ant	*next;
+	t_path			*path;
+}					t_ant;
 
 typedef struct		s_link
 {
@@ -37,7 +52,6 @@ typedef struct		s_room
 	char			*name;
 	int				x;
 	int				y;
-	int				ant;
 	t_link			*link;
 	struct s_room	*next;
 }					t_room;
@@ -46,7 +60,9 @@ typedef struct		s_lem
 {
 	t_room			*room;
 	t_path			*path;
-	int				ants;
+	t_ant 			*ant;
+	t_read			*read;
+	int				antcount;
 	int				sflag;
 	int				eflag;
 	char			*start;
@@ -71,16 +87,18 @@ t_room		*room_store(t_lem *lem, char *line);
 void		link_store(t_lem *lem, char *line);
 t_link		*append_link(t_room *r1, t_room *r2, char *name);
 t_path	*store_path(t_lem *lem, int len, char **rlist);
+t_ant *store_ants(t_lem *lem, int i);
 /*
 ** -------------------------------- read.c ----------------------------------
 */
 int		ant_count(t_lem *lem);
 void	read_input(t_lem *lem);
+t_read 	*store_file(t_lem *lem, char *str);
 /*
 ** -------------------------------- lemin.c ---------------------------------
 */
 void print_struct(t_lem *lem);
-int			error_handling(void);
+int			error_handling(char *str);
 void	print_list(t_lem *lem, char **ary, int len);
 /*
 ** -------------------------------- init.c ----------------------------------
@@ -94,19 +112,22 @@ int compare_path(t_path *path, t_path *p_next);
 int		matching_room(t_lem *lem, char *room, char **rlist, int len);
 void find_path(t_lem *lem, t_room *room, char **rlist, int len);
 void start_path(t_lem *lem);
-// void add_room(t_lem *lem, t_room *room, char **rlist, int len);
 void shortest_paths(t_lem *lem);
 void add_optimal_path(t_lem *lem);
-void move_ants(t_lem *lem);
 void	find_optimal_path(t_lem *lem);
 /*
 ** -------------------------------- opt_pathing.c ----------------------------
 */
 void shortest_opt_path(t_lem *lem);
-int place_ant(t_lem *lem, char *name, int ant);
-int add_ant(t_lem *lem, int ant);
+void set_ant_paths(t_lem *lem);
+void move_ants(t_lem *lem);
 /*
 ** -------------------------------- free.c -----------------------------------
 */
 void remove_paths(t_lem *lem);
+void	free_paths(t_lem *lem);
+void	free_str(t_lem *lem);
+void		free_ant(t_lem *lem);
+void	free_roomlink(t_lem *lem);
+void free_2darray(t_path *path);
 #endif

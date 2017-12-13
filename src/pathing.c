@@ -6,7 +6,7 @@
 /*   By: evanheum <evanheum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 13:30:55 by evanheum          #+#    #+#             */
-/*   Updated: 2017/12/08 15:27:14 by evanheum         ###   ########.fr       */
+/*   Updated: 2017/12/13 09:05:54 by evanheum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ void start_path(t_lem *lem)
 	if(!(roomlist = (char**)malloc(sizeof(char*) * lem->room_size)))
 		return ;
 	find_path(lem, room , roomlist, 0);
+	free(roomlist);
+	shortest_paths(lem);
 	
 }
 
@@ -100,6 +102,7 @@ void	find_optimal_path(t_lem *lem)
 		path = path->next;
 	}
 	tmp->flag = 1;
+	add_optimal_path(lem);
 }
 
 void shortest_paths(t_lem *lem)
@@ -130,13 +133,7 @@ void shortest_paths(t_lem *lem)
 		}
 		path = path->next;
 	}
-	path = lem->path;
-	// while (path)
-	// {
-	// 	ft_print2d(path->valid, path->len);
-	// 	ft_printf(RED"%d\t"END BLUE"%d\n"END, path->weight, path->flag);
-	// 	path = path->next;
-	// }
+	find_optimal_path(lem);
 }
 
 void add_optimal_path(t_lem *lem)
@@ -144,7 +141,6 @@ void add_optimal_path(t_lem *lem)
 	t_path *path;
 	t_path *opt;
 	t_path *tmp;
-	t_path *p;
 
 	tmp = NULL;
 	opt = lem->path;
@@ -174,9 +170,4 @@ void add_optimal_path(t_lem *lem)
 		}
 		path = path->next;
 	}
-}
-
-void	moving_path(t_lem *lem)
-{
-
 }

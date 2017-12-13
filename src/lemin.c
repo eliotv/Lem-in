@@ -6,23 +6,23 @@
 /*   By: evanheum <evanheum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/16 16:09:55 by evanheum          #+#    #+#             */
-/*   Updated: 2017/12/11 13:41:45 by evanheum         ###   ########.fr       */
+/*   Updated: 2017/12/13 09:08:32 by evanheum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lemin.h"
 
-void	print_list(t_lem *lem, char **ary, int len)
+void	print_read(t_lem *lem)
 {
-	int i;
+	t_read *read;
 
-	i = 0;
-	while (i <= len)
+	read = lem->read;
+	while (read)
 	{
-		ft_printf("%s ", ary[i]);
-		i++;
+		ft_printf("%s\n", read->str);
+		read = read->next;
 	}
-	ft_putchar('\n');
+	ft_printf("\n\n");
 }
 
 void print_path(t_lem *lem)
@@ -46,31 +46,23 @@ void print_path(t_lem *lem)
 
 void print_struct(t_lem *lem)
 {
-	t_room	*room;
+	t_ant	*room;
 	t_link	*link;
 
-	room = lem->room;
-	// ft_printf("start: %s\nend: %s\n", lem->start, lem->end);
+	room = lem->ant;
 	while (room)
 	{
-		// link = room->link;
-		// while (link)
-		// {
-		if (room->ant > 0)
-			ft_printf("L%s-%d ", room->name, room->ant);
-			// link = link->next;
-		// }
+			ft_printf("ant:%d\tlen:%d\tpath:%s\n", room->ant, room->len,room->path->valid[1]);
 		room = room->next;
 	}
-	ft_printf("\n");
 }
 
-int error_handling(void)
+int error_handling(char *str)
 {
 	int i;
 
 	i = 6;
-	ft_printf( YELLOW "ERROR: INVALID FILE \n" END);
+	ft_printf( YELLOW "ERROR: %s\n" END, str);
 	sleep(1);
 	ft_printf( CYAN "THIS PROGRAM WILL SELF DESTRUCT IN 5 SECONDS\n" END);
 	sleep(1);
@@ -87,18 +79,19 @@ int		main(void)
 {
 	// t_path *path;
 	t_lem	*lem;
-
+	
 	lem = init_struct();
 	ant_count(lem);
 	read_input(lem);
 	start_path(lem);
-	// print_path(lem);
-	shortest_paths(lem);
-	find_optimal_path(lem);
-	add_optimal_path(lem);
 	remove_paths(lem);
+	// print_read(lem);
 	shortest_opt_path(lem);
-	// move_ants(lem);
+	free_ant(lem);
+	free_str(lem);
+	free_roomlink(lem);
+	free_paths(lem);
+	free(lem);
 	// print_struct(lem);
 	// path = lem->path;
 	// while (path)
@@ -107,6 +100,5 @@ int		main(void)
 	// 	ft_printf(RED"%d\t"END BLUE"%d\n"END, path->weight, path->flag);
 	// 	path = path->next;
 	// }
-	// ft_printf("%d\n", lem->len);
 	return (0);
 }
