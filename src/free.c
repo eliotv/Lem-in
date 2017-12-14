@@ -6,17 +6,17 @@
 /*   By: evanheum <evanheum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 10:00:34 by evanheum          #+#    #+#             */
-/*   Updated: 2017/12/13 09:07:24 by evanheum         ###   ########.fr       */
+/*   Updated: 2017/12/13 10:17:54 by evanheum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lemin.h"
 
-void	remove_paths(t_lem *lem)
+void		remove_paths(t_lem *lem)
 {
-	t_path *cur;
-	t_path *prev;
-	t_path *tmp;
+	t_path	*cur;
+	t_path	*prev;
+	t_path	*tmp;
 
 	if (!lem->path)
 		return ;
@@ -41,22 +41,9 @@ void	remove_paths(t_lem *lem)
 	}
 }
 
-void free_2darray(t_path *path)
+void		free_paths(t_lem *lem)
 {
-	int i;
-
-	i = 0;
-	while (path->valid[i])
-	{
-		ft_strdel(&path->valid[i]);
-		i++;
-	}
-	free(path->valid);
-}
-
-void	free_paths(t_lem *lem)
-{
-	t_path *path;
+	t_path	*path;
 	t_path	*tmp;
 
 	if (!lem->path)
@@ -66,15 +53,15 @@ void	free_paths(t_lem *lem)
 	{
 		tmp = path->next;
 		free_2darray(path);
-		free (path);
+		free(path);
 		path = tmp;
 	}
 }
 
-void	free_str(t_lem *lem)
+void		free_str(t_lem *lem)
 {
-	t_read *read;
-	t_read *tmp;
+	t_read	*read;
+	t_read	*tmp;
 
 	if (!lem->read)
 		return ;
@@ -83,33 +70,33 @@ void	free_str(t_lem *lem)
 	{
 		tmp = read->next;
 		ft_strdel(&read->str);
-		free (read);
+		free(read);
 		read = tmp;
 	}
-
+	if (lem->room)
+		free_roomlink(lem);
 }
 
 void		free_ant(t_lem *lem)
 {
 	t_ant	*tmp;
-	
+
 	if (!lem->ant)
 		return ;
 	while (lem->ant)
 	{
 		tmp = lem->ant;
 		lem->ant = lem->ant->next;
-		free (tmp);
+		free(tmp);
 	}
-	// free (lem->ant);
-	// if (!lem->read)
-	// 	free_str(lem);
+	if (lem->read)
+		free_str(lem);
 }
 
-void	free_roomlink(t_lem *lem)
+void		free_roomlink(t_lem *lem)
 {
-	t_link *link;
-	t_room *room;
+	t_link	*link;
+	t_room	*room;
 	t_room	*tmp;
 	t_link	*temp;
 
@@ -119,7 +106,7 @@ void	free_roomlink(t_lem *lem)
 		tmp = room->next;
 		ft_strdel(&room->name);
 		link = room->link;
-		while(link)
+		while (link)
 		{
 			temp = link->next;
 			free(link);
@@ -128,4 +115,6 @@ void	free_roomlink(t_lem *lem)
 		free(room);
 		room = tmp;
 	}
+	if (lem->path)
+		free_paths(lem);
 }

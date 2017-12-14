@@ -6,7 +6,7 @@
 /*   By: evanheum <evanheum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/16 19:16:44 by evanheum          #+#    #+#             */
-/*   Updated: 2017/12/13 08:40:34 by evanheum         ###   ########.fr       */
+/*   Updated: 2017/12/13 14:52:43 by evanheum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ int			ant_count(t_lem *lem)
 	if (get_next_line(0, &line) < 0)
 		return (-1);
 	if (check_xy_format(line))
-		error_handling("Invalid ant count");
+		error_handling(lem, "Invalid ant count");
 	lem->antcount = ft_atoi(line);
 	if (lem->antcount < 1)
-		error_handling("Invalid ant count");
+		error_handling(lem, "Invalid ant count");
 	while (++i <= lem->antcount)
 		lem->ant = store_ants(lem, i);
 	lem->read = store_file(lem, line);
@@ -47,14 +47,13 @@ void		read_input(t_lem *lem)
 		lem->read = store_file(lem, line);
 	}
 	if (lem->eflag != 2 || lem->sflag != 2)
-		error_handling("Invalid number of starts or ends");
+		error_handling(lem, "Invalid number of starts or ends");
 }
 
-
-t_read *store_file(t_lem *lem, char *str)
+t_read		*store_file(t_lem *lem, char *str)
 {
-	t_read *new;
-	t_read *read;
+	t_read	*new;
+	t_read	*read;
 
 	if (!(new = (t_read*)malloc(sizeof(t_read))))
 		return (NULL);
@@ -67,6 +66,4 @@ t_read *store_file(t_lem *lem, char *str)
 		read = read->next;
 	read->next = new;
 	return (lem->read);
-	
-
 }

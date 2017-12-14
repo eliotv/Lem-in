@@ -6,13 +6,13 @@
 /*   By: evanheum <evanheum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 09:28:22 by evanheum          #+#    #+#             */
-/*   Updated: 2017/12/12 16:09:57 by evanheum         ###   ########.fr       */
+/*   Updated: 2017/12/14 13:51:58 by evanheum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lemin.h"
 
-void	check_startend(t_lem *lem, char *str)
+void		check_startend(t_lem *lem, char *str)
 {
 	if (lem->sflag == 1)
 	{
@@ -25,15 +25,15 @@ void	check_startend(t_lem *lem, char *str)
 		lem->eflag++;
 	}
 	else
-		error_handling("Invalid number or starts or endings");
+		error_handling(lem, "Invalid number or starts or endings");
 }
 
-void check_format(t_lem *lem, char *str)
+void		check_format(t_lem *lem, char *str)
 {
-	int link;
-	int room;
-	int i;
-	t_room *tmp;
+	int		link;
+	int		room;
+	int		i;
+	t_room	*tmp;
 
 	i = 0;
 	room = 0;
@@ -41,45 +41,47 @@ void check_format(t_lem *lem, char *str)
 	while (str[i])
 	{
 		if (str[i] == '-')
-			link = 1;
+			link++;
 		else if (str[i] == ' ')
-			room = 1;
+			room++;
 		i++;
 	}
-	if (link == 1)
-		link_store(lem, str);
 	if (room == 1)
 		lem->room = room_store(lem, str);
+	if (link == 1)
+		link_store(lem, str);
+	else
+		error_handling(lem, "Invalid room or link");
 }
 
-int         valid_room(t_lem *lem, char *a, char *b)
+int			valid_room(t_lem *lem, char *a, char *b)
 {
-    int flag;
-    t_room *tmp;
-	
+	int		flag;
+	t_room	*tmp;
+
 	tmp = lem->room;
-    flag = 0;
-    while (tmp)
-    {
-        if (!ft_strcmp(tmp->name, a))
-            flag++;
-        else if (!ft_strcmp(tmp->name, b))
-            flag++;
-        tmp = tmp->next;
-    }
-    return (flag);
+	flag = 0;
+	while (tmp)
+	{
+		if (!ft_strcmp(tmp->name, a))
+			flag++;
+		else if (!ft_strcmp(tmp->name, b))
+			flag++;
+		tmp = tmp->next;
+	}
+	return (flag);
 }
 
-int        check_xy_format(char *str)
+int			check_xy_format(char *str)
 {
-    int i;
+	int		i;
 
-    i = 0;
-    while (str[i])
-    {
-        if(!ft_isdigit(str[i]))
-            return (-1);
-        i++;
-    }
-    return (0);
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (-1);
+		i++;
+	}
+	return (0);
 }

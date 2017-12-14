@@ -6,7 +6,7 @@
 /*   By: evanheum <evanheum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 16:13:23 by evanheum          #+#    #+#             */
-/*   Updated: 2017/12/12 16:14:28 by evanheum         ###   ########.fr       */
+/*   Updated: 2017/12/14 13:58:25 by evanheum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ t_path		*store_path(t_lem *lem, int len, char **rlist)
 		new->valid[i] = ft_strdup(rlist[i]);
 		i++;
 	}
-	new->valid[i] = NULL;
 	new->next = NULL;
 	if (!tmp)
 		return (new);
@@ -75,7 +74,7 @@ void		link_store(t_lem *lem, char *line)
 
 	str = ft_strsplit(line, '-');
 	if (valid_room(lem, str[0], str[1]) != 2)
-		error_handling("Invalid link to room");
+		error_handling(lem, "Invalid link to room");
 	r1 = str[0];
 	r2 = str[1];
 	room = lem->room;
@@ -97,24 +96,22 @@ t_room		*room_store(t_lem *lem, char *line)
 	char	**str;
 	t_room	*tmp;
 	t_room	*new;
-	
-	if (line[0] == 'L')
-		error_handling("L is invalid file format");
+
+	(line[0] == 'L') ? error_handling(lem, "L is invalid file format") : 0;
 	if (!(new = (t_room*)malloc(sizeof(t_room))))
-		return NULL;
+		return (NULL);
 	str = ft_strsplit(line, ' ');
 	free(str[1]);
 	free(str[2]);
-	if (lem->sflag == 1 || lem->eflag == 1)
-		check_startend(lem,str[0]);
+	(lem->sflag == 1 || lem->eflag == 1) ? check_startend(lem, str[0]) : 0;
 	new->name = str[0];
 	if (check_xy_format(str[1]) && check_xy_format(str[2]))
-		error_handling("Invalid link given");
-	tmp = lem->room;
+		error_handling(lem, "Invalid link given");
 	new->link = NULL;
 	new->next = NULL;
 	lem->room_size++;
 	free(str);
+	tmp = lem->room;
 	if (tmp == NULL)
 		return (new);
 	while (tmp->next)
@@ -123,7 +120,7 @@ t_room		*room_store(t_lem *lem, char *line)
 	return (lem->room);
 }
 
-t_ant *store_ants(t_lem *lem, int i)
+t_ant		*store_ants(t_lem *lem, int i)
 {
 	t_ant	*ant;
 	t_ant	*new;

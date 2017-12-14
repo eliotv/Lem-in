@@ -6,7 +6,7 @@
 #    By: evanheum <evanheum@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/16 15:11:12 by evanheum          #+#    #+#              #
-#    Updated: 2017/12/13 09:08:25 by evanheum         ###   ########.fr        #
+#    Updated: 2017/12/13 14:59:52 by evanheum         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,8 @@ LEMINDR = \
 	pathing.c \
 	free.c \
 	opt_pathing.c \
+	print.c \
+	move_ants.c \
 
 SRC = $(addprefix src/, $(LEMINDR))
 OBJ = $(SRC:.c=.o)
@@ -40,7 +42,7 @@ $(OBJ): %.o: %.c
 	@$(CC) -c $(LDFALGS) $< -o $@
 
 $(NAME): $(LIBFT) $(OBJ)
-	@$(CC) src/alloc_wrap.c $(LDFLAGS) -o  $@ $^
+	@$(CC) $(LDFLAGS) -o  $@ $^
 	@echo "\033[32m    ~*COMPILED LEM-IN*~\033[0m"
 
 clean:

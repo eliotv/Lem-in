@@ -6,7 +6,7 @@
 /*   By: evanheum <evanheum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/16 19:59:14 by evanheum          #+#    #+#             */
-/*   Updated: 2017/12/12 10:20:42 by evanheum         ###   ########.fr       */
+/*   Updated: 2017/12/13 10:18:38 by evanheum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,15 @@ t_lem		*init_struct(void)
 	return (lem);
 }
 
-void		ft_print2d(char **ary, int len)
+void		free_2darray(t_path *path)
 {
 	int		i;
 
 	i = 0;
-	while (i <= len)
+	while (path->valid[i])
 	{
-		ft_printf(YELLOW"%s\t" END, ary[i]);
+		ft_strdel(&path->valid[i]);
 		i++;
 	}
+	free(path->valid);
 }
