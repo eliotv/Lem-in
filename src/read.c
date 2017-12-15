@@ -6,7 +6,7 @@
 /*   By: evanheum <evanheum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/16 19:16:44 by evanheum          #+#    #+#             */
-/*   Updated: 2017/12/13 14:52:43 by evanheum         ###   ########.fr       */
+/*   Updated: 2017/12/14 16:03:56 by evanheum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,13 @@ int			ant_count(t_lem *lem)
 void		read_input(t_lem *lem)
 {
 	char	*line;
+	int		cmd;
 
+	cmd = 0;
 	while (get_next_line(0, &line) > 0)
 	{
+		if (line[1] == '#')
+			cmd++;
 		if (!ft_strncmp(line, "##start", 7))
 			lem->sflag++;
 		else if (!ft_strncmp(line, "##end", 5))
@@ -46,7 +50,7 @@ void		read_input(t_lem *lem)
 			check_format(lem, line);
 		lem->read = store_file(lem, line);
 	}
-	if (lem->eflag != 2 || lem->sflag != 2)
+	if (cmd != 2 || lem->eflag != 2 || lem->sflag != 2)
 		error_handling(lem, "Invalid number of starts or ends");
 }
 

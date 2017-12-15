@@ -6,7 +6,7 @@
 /*   By: evanheum <evanheum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/16 16:09:55 by evanheum          #+#    #+#             */
-/*   Updated: 2017/12/13 15:05:00 by evanheum         ###   ########.fr       */
+/*   Updated: 2017/12/14 16:17:25 by evanheum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,19 @@
 
 int			error_handling(t_lem *lem, char *str)
 {
-	// int		i;
-	str = NULL;
-	// i = 6;
-	// ft_printf(YELLOW "ERROR: %s\n" END, str);
-	// sleep(1);
-	// ft_printf(CYAN "THIS PROGRAM WILL SELF DESTRUCT IN 5 SECONDS\n" END);
-	// sleep(1);
-	// while (--i > 0)
-	// {
-	// 	ft_printf(YELLOW "%d\t" END, i);
-	// 	sleep(1);
-	// }
-	// ft_printf(RED "BOOOOOOOM!!!\n" END);
-	ft_printf("ERROR\n");
+	int		i;
+
+	i = 6;
+	ft_printf(YELLOW "ERROR: %s\n" END, str);
+	sleep(1);
+	ft_printf(CYAN "THIS PROGRAM WILL SELF DESTRUCT IN 5 SECONDS\n" END);
+	sleep(1);
+	while (--i > 0)
+	{
+		ft_printf(YELLOW "%d\t" END, i);
+		sleep(1);
+	}
+	ft_printf(RED "BOOOOOOOM!!!\n" END);
 	free_ant(lem);
 	exit(0);
 }

@@ -6,7 +6,7 @@
 /*   By: evanheum <evanheum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 09:28:22 by evanheum          #+#    #+#             */
-/*   Updated: 2017/12/14 13:51:58 by evanheum         ###   ########.fr       */
+/*   Updated: 2017/12/14 16:17:03 by evanheum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,16 @@ void		check_format(t_lem *lem, char *str)
 	while (str[i])
 	{
 		if (str[i] == '-')
-			link++;
+			link = 1;
 		else if (str[i] == ' ')
 			room++;
 		i++;
 	}
-	if (room == 1)
+	if (room == 2)
 		lem->room = room_store(lem, str);
-	if (link == 1)
+	else if (link == 1)
 		link_store(lem, str);
-	else
+	else if (room != 2 || link != 1)
 		error_handling(lem, "Invalid room or link");
 }
 
@@ -74,6 +74,7 @@ int			valid_room(t_lem *lem, char *a, char *b)
 
 int			check_xy_format(char *str)
 {
+	t_room	*room;
 	int		i;
 
 	i = 0;
@@ -84,4 +85,21 @@ int			check_xy_format(char *str)
 		i++;
 	}
 	return (0);
+}
+
+void		link_compare(t_lem *lem, char *s1, char *s2)
+{
+	t_room	*room;
+	t_link	*link;
+
+	room = lem->room;
+	while (room && ft_strcmp(s1, room->name))
+		room = room->next;
+	link = room->link;
+	while (link)
+	{
+		if (!ft_strcmp(s2, link->room->name))
+			error_handling(lem, "link already exists");
+		link = link->next;
+	}
 }

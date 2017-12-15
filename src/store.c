@@ -6,7 +6,7 @@
 /*   By: evanheum <evanheum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 16:13:23 by evanheum          #+#    #+#             */
-/*   Updated: 2017/12/14 13:58:25 by evanheum         ###   ########.fr       */
+/*   Updated: 2017/12/14 16:15:04 by evanheum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void		link_store(t_lem *lem, char *line)
 	r1 = str[0];
 	r2 = str[1];
 	room = lem->room;
+	link_compare(lem, r1, r2);
 	while (room)
 	{
 		if (!ft_strcmp(r1, room->name))
@@ -101,12 +102,12 @@ t_room		*room_store(t_lem *lem, char *line)
 	if (!(new = (t_room*)malloc(sizeof(t_room))))
 		return (NULL);
 	str = ft_strsplit(line, ' ');
-	free(str[1]);
-	free(str[2]);
 	(lem->sflag == 1 || lem->eflag == 1) ? check_startend(lem, str[0]) : 0;
 	new->name = str[0];
-	if (check_xy_format(str[1]) && check_xy_format(str[2]))
+	if (check_xy_format(str[1]) || check_xy_format(str[2]))
 		error_handling(lem, "Invalid link given");
+	(str[1]) ? free(str[1]) : 0;
+	(str[2]) ? free(str[2]) : 0;
 	new->link = NULL;
 	new->next = NULL;
 	lem->room_size++;

@@ -6,7 +6,7 @@
 /*   By: evanheum <evanheum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/16 16:10:56 by evanheum          #+#    #+#             */
-/*   Updated: 2017/12/13 14:51:35 by evanheum         ###   ########.fr       */
+/*   Updated: 2017/12/14 16:03:29 by evanheum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int					valid_room(t_lem *lem, char *a, char *b);
 void				check_format(t_lem *lem, char *str);
 void				check_startend(t_lem *lem, char *str);
 int					check_xy_format(char *str);
+void				link_compare(t_lem *lem, char *s1, char *s2);
 /*
 ** -------------------------------- store.c ---------------------------------
 */
